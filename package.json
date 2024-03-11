@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "echo \"Build not needed\" && exit 0"
   },
-  "author": "Invicara <invicara.com>",
+  "author": "Invicara Developer Support <developer.support@invicara.com>",
   "license": "APACHE 2.0 January 2004",
   "dependencies": {
     "decompress": "4.2.1",
