@@ -22,10 +22,10 @@ read(nameOptions).then((appName) => {
             let appidOptions = {prompt: "Application ID (required - default = dev-training):", default: "77b2cdca-c1a3-4d27-9d19-7b5358e3b337"}
             read(appidOptions).then((appId) => {
 
-               let cfgUserTypeOptions = {prompt: "Config _userType: (required - default = dev-training)", default: "dev-train"}
+               let cfgUserTypeOptions = {prompt: "Config _userType: (required - default = dev-training):", default: "dev-train"}
                read(cfgUserTypeOptions).then((cfgtype) => {
 
-                  let twinitOptions = {prompt: "Twinit URL:", default: "https://sandbox-api.invicara.com"}
+                  let twinitOptions = {prompt: "Twinit API URL:", default: "https://sandbox-api.invicara.com"}
                   read(twinitOptions).then((url) => {
 
                      console.log('--> Extracting source files')
