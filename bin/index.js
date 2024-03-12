@@ -28,7 +28,6 @@ read(nameOptions).then((appName) => {
                   let twinitOptions = {prompt: "Twinit API URL:", default: "https://sandbox-api.invicara.com"}
                   read(twinitOptions).then((url) => {
 
-                     console.log('--> Extracting source files')
                      decompress(path.join(__dirname, 'starter-app-source.zip'), './', {strip: 1}).then(() => {
          
                         package.name = appName.replaceAll(' ', '-').toLowerCase()
@@ -37,7 +36,6 @@ read(nameOptions).then((appName) => {
                         package.author = author
          
                         fs.writeFileSync('./package.json', JSON.stringify(package, null, 3))
-                        console.log('--> Created package.json file')
 
                         fs.writeFileSync('./app/public/config.js', `const endPointConfig = {
                            itemServiceOrigin: '${url}',
@@ -48,8 +46,6 @@ read(nameOptions).then((appName) => {
                            baseRoot: 'http://localhost:8084',
                            applicationId: '${appId}'
                         }`)
-                        console.log('--> Created ./app/public/config.js file')
-
 
                         fs.writeFileSync('./app/ipaCore/ipaConfig.js', `const ipaConfig = {
                            appName: "${appName}",
@@ -68,7 +64,6 @@ read(nameOptions).then((appName) => {
                         
                            export default ipaConfig`)
                         })
-                        console.log('--> Created ./app/ipaCore/ipaConfig.js file')
 
                         console.log('--> New Twinit React Client App Setup Complete')
                         console.log('--> Run "npm install" to install node modules')
