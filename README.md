@@ -1,4 +1,8 @@
+![digitaltwin-factory logo](./img/dtfactoryv3.png)
+
 # CREATE-TWINIT-APP
+
+create-twinit-app is made available as a part of the digitaltwin-factory open source community.
 
 create-twinit-app scaffolds a new Twinit React client application much in the same way the create-react-app initializes a new react application.
 
@@ -18,5 +22,5 @@ You may instead accept the defaults all the way through, and update the informat
 When ready run:
 
 ```
-npx create-twinit-app
+npx create-twinit-app@latest
 ```
