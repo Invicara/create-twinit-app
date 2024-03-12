@@ -1,6 +1,6 @@
 {
   "name": "create-twinit-app",
-  "version": "2.2.90",
+  "version": "2.2.91",
   "description": "npx cmd to create a scaffloded Twinit React client app",
   "bin": {
     "create-twinit-app": "bin/index.js"
