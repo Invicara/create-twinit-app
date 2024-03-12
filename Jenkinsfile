@@ -32,13 +32,13 @@ pipeline {
             return
           }
 
-          local_version = sh(script: "node -e \"process.stdout.write(require('./package').version)\"").trim().replaceAll(/\+.+/, '')
+          local_version = sh(script: "node -e \"process.stdout.write(require('./package').version)\"", returnStdout: true).trim().replaceAll(/\+.+/, '')
 
           remote_version = []
 
           viewStatusCode = sh script: "npm view --json ${env.NPM_PKG_NAME} > /dev/null 2>&1", returnStatus: true
           if (viewStatusCode == 0) {
-            versionList = sh(script: "npm view --json ${env.NPM_PKG_NAME}").trim()
+            versionList = sh(script: "npm view --json ${env.NPM_PKG_NAME}", returnStdout: true).trim()
             remote_versions = readJSON(text: versionList)["versions"]
           }
 
