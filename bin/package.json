@@ -78,7 +78,6 @@
     "util": "^0.12.5",
     "vm-browserify": "^1.1.2"
   },
-  "license": "UNLICENSED",
   "devDependencies": {
     "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
@@ -117,9 +116,5 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.3.4"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Invicara/ipa-dt.git"
   }
 }

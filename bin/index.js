@@ -5,7 +5,7 @@ const path = require('path')
 const fs = require('fs')
 const { read } = require('read')
 
-let package = require('./package.json')
+const package = require('./package.json')
 
 let nameOptions = {prompt: "Twinit app name:", default: "my-twinit-react-client"}
 read(nameOptions).then((appName) => {
