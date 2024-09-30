@@ -50,26 +50,26 @@
           }
         },
         eventList = {},
-        twinitUtils = {
+        utils = {
           hasTouch: ('ontouchstart' in doc.documentElement || win.navigator.msPointerEnabled),
           eventType: function(action) {
             var eventTypes = {
-              down: (twinitUtils.hasTouch ? 'touchstart' : 'mousedown'),
-              move: (twinitUtils.hasTouch ? 'touchmove' : 'mousemove'),
-              up: (twinitUtils.hasTouch ? 'touchend' : 'mouseup'),
-              out: (twinitUtils.hasTouch ? 'touchcancel' : 'mouseout')
+              down: (utils.hasTouch ? 'touchstart' : 'mousedown'),
+              move: (utils.hasTouch ? 'touchmove' : 'mousemove'),
+              up: (utils.hasTouch ? 'touchend' : 'mouseup'),
+              out: (utils.hasTouch ? 'touchcancel' : 'mouseout')
             };
             return eventTypes[action];
           },
           page: function(t, e){
-            return (twinitUtils.hasTouch && e.touches.length && e.touches[0]) ? e.touches[0]['page'+t] : e['page'+t];
+            return (utils.hasTouch && e.touches.length && e.touches[0]) ? e.touches[0]['page'+t] : e['page'+t];
           },
           klass: {
             has: function(el, name){
               return (el.className).indexOf(name) !== -1;
             },
             add: function(el, name){
-              if(!twinitUtils.klass.has(el, name) && settings.addBodyClasses){
+              if(!utils.klass.has(el, name) && settings.addBodyClasses){
                 el.className += " "+name;
               }
             },
@@ -105,7 +105,7 @@
             for (property in source) {
               if (source[property] && source[property].constructor && source[property].constructor === Object) {
                 destination[property] = destination[property] || {};
-                twinitUtils.deepExtend(destination[property], source[property]);
+                utils.deepExtend(destination[property], source[property]);
               } else {
                 destination[property] = source[property];
               }
@@ -167,7 +167,7 @@
             get: {
               matrix: function(index) {
   
-                if( !twinitUtils.canTransform() ){
+                if( !utils.canTransform() ){
                   return parseInt(settings.element.style.left, 10);
                 } else {
                   var matrix = win.getComputedStyle(settings.element)[cache.vendor+'Transform'].match(/\((.*)\)/),
@@ -193,16 +193,16 @@
               clearInterval(cache.animatingInterval);
   
               if(cache.easingTo===0){
-                twinitUtils.klass.remove(doc.body, 'snapjs-right');
-                twinitUtils.klass.remove(doc.body, 'snapjs-left');
+                utils.klass.remove(doc.body, 'snapjs-right');
+                utils.klass.remove(doc.body, 'snapjs-left');
               }
   
-              twinitUtils.dispatchEvent('animated');
-              twinitUtils.events.removeEvent(settings.element, twinitUtils.transitionCallback(), action.translate.easeCallback);
+              utils.dispatchEvent('animated');
+              utils.events.removeEvent(settings.element, utils.transitionCallback(), action.translate.easeCallback);
             },
             easeTo: function(n) {
   
-              if( !twinitUtils.canTransform() ){
+              if( !utils.canTransform() ){
                 cache.translation = n;
                 action.translate.x(n);
               } else {
@@ -216,10 +216,10 @@
                 }
   
                 cache.animatingInterval = setInterval(function() {
-                  twinitUtils.dispatchEvent('animating');
+                  utils.dispatchEvent('animating');
                 }, 1);
   
-                twinitUtils.events.addEvent(settings.element, twinitUtils.transitionCallback(), action.translate.easeCallback);
+                utils.events.addEvent(settings.element, utils.transitionCallback(), action.translate.easeCallback);
                 action.translate.x(n);
               }
               if(n===0){
@@ -238,10 +238,10 @@
               settings.element.style[cache.vendor+'Transition'] = 'all ' + settings.transitionSpeed + 's ' + settings.easing;
   
               cache.animatingInterval = setInterval(function() {
-                twinitUtils.dispatchEvent('animating');
+                utils.dispatchEvent('animating');
               }, 1);
   
-              twinitUtils.events.addEvent(settings.element, twinitUtils.transitionCallback(), action.translate.easeCallback);
+              utils.events.addEvent(settings.element, utils.transitionCallback(), action.translate.easeCallback);
               if (open) {
                 const elementBottomDimension = settings.elementBottomDimension ?
                     settings.elementBottomDimension : 350;
@@ -302,7 +302,7 @@
                 n = 0;
               }
   
-              if( twinitUtils.canTransform() ){
+              if( utils.canTransform() ){
                 var theTranslate = 'translate3d(' + n + 'px, 0,0)';
                 settings.element.style[cache.vendor+'Transform'] = theTranslate;
                 if (settings.bottomElement) {
@@ -320,28 +320,28 @@
             listen: function() {
               cache.translation = 0;
               cache.easing = false;
-              twinitUtils.events.addEvent(settings.element, twinitUtils.eventType('down'), action.drag.startDrag);
-              twinitUtils.events.addEvent(settings.element, twinitUtils.eventType('move'), action.drag.dragging);
-              twinitUtils.events.addEvent(settings.element, twinitUtils.eventType('up'), action.drag.endDrag);
+              utils.events.addEvent(settings.element, utils.eventType('down'), action.drag.startDrag);
+              utils.events.addEvent(settings.element, utils.eventType('move'), action.drag.dragging);
+              utils.events.addEvent(settings.element, utils.eventType('up'), action.drag.endDrag);
             },
             stopListening: function() {
-              twinitUtils.events.removeEvent(settings.element, twinitUtils.eventType('down'), action.drag.startDrag);
-              twinitUtils.events.removeEvent(settings.element, twinitUtils.eventType('move'), action.drag.dragging);
-              twinitUtils.events.removeEvent(settings.element, twinitUtils.eventType('up'), action.drag.endDrag);
+              utils.events.removeEvent(settings.element, utils.eventType('down'), action.drag.startDrag);
+              utils.events.removeEvent(settings.element, utils.eventType('move'), action.drag.dragging);
+              utils.events.removeEvent(settings.element, utils.eventType('up'), action.drag.endDrag);
             },
             startDrag: function(e) {
               // No drag on ignored elements
               var target = e.target ? e.target : e.srcElement,
-                ignoreParent = twinitUtils.parentUntil(target, 'data-snap-ignore');
+                ignoreParent = utils.parentUntil(target, 'data-snap-ignore');
   
               if (ignoreParent) {
-                twinitUtils.dispatchEvent('ignore');
+                utils.dispatchEvent('ignore');
                 return;
               }
   
   
               if(settings.dragger){
-                var dragParent = twinitUtils.parentUntil(target, settings.dragger);
+                var dragParent = utils.parentUntil(target, settings.dragger);
   
                 // Only use dragger if we're in a closed state
                 if( !dragParent &&
@@ -352,13 +352,13 @@
                 }
               }
   
-              twinitUtils.dispatchEvent('start');
+              utils.dispatchEvent('start');
               settings.element.style[cache.vendor+'Transition'] = '';
               cache.isDragging = true;
               cache.hasIntent = null;
               cache.intentChecked = false;
-              cache.startDragX = twinitUtils.page('X', e);
-              cache.startDragY = twinitUtils.page('Y', e);
+              cache.startDragX = utils.page('X', e);
+              cache.startDragY = utils.page('Y', e);
               cache.dragWatchers = {
                 current: 0,
                 last: 0,
@@ -382,8 +382,8 @@
             dragging: function(e) {
               if (cache.isDragging && settings.touchToDrag) {
   
-                var thePageX = twinitUtils.page('X', e),
-                  thePageY = twinitUtils.page('Y', e),
+                var thePageX = utils.page('X', e),
+                  thePageY = utils.page('Y', e),
                   translated = cache.translation,
                   absoluteTranslation = action.translate.get.matrix(4),
                   whileDragX = thePageX - cache.startDragX,
@@ -398,16 +398,16 @@
   
                 if(settings.addBodyClasses){
                   if((absoluteTranslation)>0){
-                    twinitUtils.klass.add(doc.body, 'snapjs-left');
-                    twinitUtils.klass.remove(doc.body, 'snapjs-right');
+                    utils.klass.add(doc.body, 'snapjs-left');
+                    utils.klass.remove(doc.body, 'snapjs-right');
                   } else if((absoluteTranslation)<0){
-                    twinitUtils.klass.add(doc.body, 'snapjs-right');
-                    twinitUtils.klass.remove(doc.body, 'snapjs-left');
+                    utils.klass.add(doc.body, 'snapjs-right');
+                    utils.klass.remove(doc.body, 'snapjs-left');
                   }
                 }
   
                 if (cache.hasIntent === false || cache.hasIntent === null) {
-                  var deg = twinitUtils.angleOfDrag(thePageX, thePageY),
+                  var deg = utils.angleOfDrag(thePageX, thePageY),
                     inRightRange = (deg >= 0 && deg <= settings.slideIntent) || (deg <= 360 && deg > (360 - settings.slideIntent)),
                     inLeftRange = (deg >= 180 && deg <= (180 + settings.slideIntent)) || (deg <= 180 && deg >= (180 - settings.slideIntent));
                   if (!inLeftRange && !inRightRange) {
@@ -425,8 +425,8 @@
                   return;
                 }
   
-                twinitUtils.events.prevent(e);
-                twinitUtils.dispatchEvent('drag');
+                utils.events.prevent(e);
+                utils.dispatchEvent('drag');
   
                 cache.dragWatchers.current = thePageX;
                 // Determine which direction we are going
@@ -487,13 +487,13 @@
             },
             endDrag: function(e) {
               if (cache.isDragging) {
-                twinitUtils.dispatchEvent('end');
+                utils.dispatchEvent('end');
                 var translated = action.translate.get.matrix(4);
   
                 // Tap Close
                 if (cache.dragWatchers.current === 0 && translated !== 0 && settings.tapToClose) {
-                  twinitUtils.dispatchEvent('close');
-                  twinitUtils.events.prevent(e);
+                  utils.dispatchEvent('close');
+                  utils.events.prevent(e);
                   action.translate.easeTo(0);
                   cache.isDragging = false;
                   cache.startDragX = 0;
@@ -532,15 +532,15 @@
                   }
                 }
                 cache.isDragging = false;
-                cache.startDragX = twinitUtils.page('X', e);
+                cache.startDragX = utils.page('X', e);
               }
             }
           }
         },
         init = function(opts) {
           if (opts.element) {
-            twinitUtils.deepExtend(settings, opts);
-            cache.vendor = twinitUtils.vendor();
+            utils.deepExtend(settings, opts);
+            cache.vendor = utils.vendor();
             action.drag.listen();
           }
         };
@@ -548,34 +548,34 @@
        * Public
        */
       this.open = function(side) {
-        twinitUtils.dispatchEvent('open');
-        twinitUtils.klass.remove(doc.body, 'snapjs-expand-left');
-        twinitUtils.klass.remove(doc.body, 'snapjs-expand-right');
+        utils.dispatchEvent('open');
+        utils.klass.remove(doc.body, 'snapjs-expand-left');
+        utils.klass.remove(doc.body, 'snapjs-expand-right');
   
         if (side === 'left') {
           cache.simpleStates.opening = 'left';
           cache.simpleStates.towards = 'right';
-          twinitUtils.klass.add(doc.body, 'snapjs-left');
-          twinitUtils.klass.remove(doc.body, 'snapjs-right');
+          utils.klass.add(doc.body, 'snapjs-left');
+          utils.klass.remove(doc.body, 'snapjs-right');
           action.translate.easeTo(settings.maxPosition);
         } else if (side === 'right') {
           cache.simpleStates.opening = 'right';
           cache.simpleStates.towards = 'left';
-          twinitUtils.klass.remove(doc.body, 'snapjs-left');
-          twinitUtils.klass.add(doc.body, 'snapjs-right');
+          utils.klass.remove(doc.body, 'snapjs-left');
+          utils.klass.add(doc.body, 'snapjs-right');
           action.translate.easeTo(settings.minPosition);
         } else if (side === 'bottom') {
           cache.simpleStates.opening = 'bottom';
-          twinitUtils.klass.add(doc.body, 'snapjs-bottom');
+          utils.klass.add(doc.body, 'snapjs-bottom');
           action.translate.easeUp(true);
         }
       };
       this.close = function() {
-        twinitUtils.dispatchEvent('close');
+        utils.dispatchEvent('close');
         action.translate.easeTo(0);
       };
       this.closeBottom = function() {
-        twinitUtils.dispatchEvent('close');
+        utils.dispatchEvent('close');
         action.translate.easeUp(false);
   
       };
@@ -583,13 +583,13 @@
         var to = win.innerWidth || doc.documentElement.clientWidth;
   
         if(side==='left'){
-          twinitUtils.dispatchEvent('expandLeft');
-          twinitUtils.klass.add(doc.body, 'snapjs-expand-left');
-          twinitUtils.klass.remove(doc.body, 'snapjs-expand-right');
+          utils.dispatchEvent('expandLeft');
+          utils.klass.add(doc.body, 'snapjs-expand-left');
+          utils.klass.remove(doc.body, 'snapjs-expand-right');
         } else {
-          twinitUtils.dispatchEvent('expandRight');
-          twinitUtils.klass.add(doc.body, 'snapjs-expand-right');
-          twinitUtils.klass.remove(doc.body, 'snapjs-expand-left');
+          utils.dispatchEvent('expandRight');
+          utils.klass.add(doc.body, 'snapjs-expand-right');
+          utils.klass.remove(doc.body, 'snapjs-expand-left');
           to *= -1;
         }
         action.translate.easeTo(to);
@@ -606,16 +606,16 @@
       };
   
       this.enable = function() {
-        twinitUtils.dispatchEvent('enable');
+        utils.dispatchEvent('enable');
         action.drag.listen();
       };
       this.disable = function() {
-        twinitUtils.dispatchEvent('disable');
+        utils.dispatchEvent('disable');
         action.drag.stopListening();
       };
   
       this.settings = function(opts){
-        twinitUtils.deepExtend(settings, opts);
+        utils.deepExtend(settings, opts);
       };
   
       this.state = function() {

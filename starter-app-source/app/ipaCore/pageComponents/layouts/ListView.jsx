@@ -1,7 +1,7 @@
 import React from "react"
-import {IfefContent, IfefSubHeaderBar} from '@invicara/react-ifef';
-import {mobiscroll} from '@invicara/invicara-lib';
-import '@invicara/invicara-lib/dist/invicara-lib.css';
+import {IfefContent, IfefSubHeaderBar} from '@invicara/ipa-core/modules/react-ifef';
+import {mobiscroll} from '@dtplatform/invicara-lib';
+import '@dtplatform/invicara-lib/dist/invicara-lib.css';
 import ContainerView from "./ContainerView";
 
 export default class ListView extends React.Component {

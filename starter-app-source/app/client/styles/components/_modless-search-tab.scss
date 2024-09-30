@@ -2,33 +2,11 @@ $pink: var(--app-accent-color);
 
 .modless-search-tab {
 
-  .general-title {
-    margin: 10px;
-    text-align: left;
-    font-size: 14px;
-    font-weight: bold;
+  .general-title{
+    font-weight:bold;
+    font-size: 24px;
     letter-spacing: 0;
     color: #333333;
-    display: inline-block;
-  }
-
-  .entity-tab-group {
-    display: flex;
-    flex-wrap: wrap;
-
-    .entity-tab-button {
-      flex-grow: 1;
-      &.active-entity {
-        color: var(--app-accent-color);
-      }
-    }
-
-  }
-
-
-
-  .MuiTabs-flexContainer {
-    width: 90%;
   }
 
   .MuiTabs-flexContainer {
@@ -37,8 +15,8 @@ $pink: var(--app-accent-color);
 
   .fetch-container{
     margin: 20px 0;
-    height: calc(10% - 50px);
-    /*overflow-y: auto;*/
+    height: 80%;
+    overflow-y: auto;
 
     &::-webkit-scrollbar {
       width: 7px;

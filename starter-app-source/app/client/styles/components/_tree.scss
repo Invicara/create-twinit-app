@@ -1,4 +1,4 @@
-/*TODO check if these styles are actually being used by some tree component and move them to ipa-core or else delete them*/
+//TODO check if these styles are actually being used by some tree component and move them to ipa-core or else delete them
 /* Nodes */
 .tree ul {
     margin-left: 5px;
@@ -95,7 +95,7 @@ ul.tree>li:first-child::after {
     background: #eee; color: #000;
 }
 
-/*selected node*/
+//selected node
 .tree li a.selected {
   background-color: lightyellow;
 }

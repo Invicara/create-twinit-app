@@ -1,0 +1,4 @@
+This allows the css folder to be tracked by git. The folder is necessary to avoid a failing "require" that would create a warning.
+
+
+TLDR: Please keep this file

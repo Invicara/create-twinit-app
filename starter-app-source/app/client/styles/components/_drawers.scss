@@ -14,6 +14,17 @@
       min-width: 265px;
     }
   }
+
+  hr {
+    border-top: 2px solid  var(--app-accent-color);
+  }
+
+  .drawer-title {
+    font-weight: bold;
+    font-size: 24px;
+    letter-spacing: 0;
+    color: #333333;
+  }
 }
 
 .entities-view {

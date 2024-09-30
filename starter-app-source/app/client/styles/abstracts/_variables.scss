@@ -15,28 +15,28 @@
  * permission is obtained from Invicara Inc.
  */
 
-/* config vars*/
+// config vars
 
-/* main colors */
+// main colors
 $main-color: #026bfd;
 $light-grey: #6d6e70;
 
-/* web colors */
+// web colors
 $invicara-primary: $main-color;
 $invicara-text: $light-grey;
 
-/* Main fonts */
+// Main fonts
 $font-base: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-/*$font-contrast:;*/
+//$font-contrast:;
 $font-size: 18px;
 
-/* Inside components */
+// Inside components
 
-/* border radius */
+// border radius
 $radius-principal: 10px;
 $radius-btn: 10px;
 
-/* shadows */
+// shadows
 $shadow-soft:  0px 2px 10px #000;
 $shadow-mid:  0px 2px 20px #000;
 $shadow-hard:  5px 5px 15px #000;
@@ -44,4 +44,5 @@ $shadow-hard:  5px 5px 15px #000;
 $blueColor: #3369ff;
 $borderRadiusSize: 0.2em;
 
+// alert colors
 $alertIndicatorDangerColor:  #CD2026;

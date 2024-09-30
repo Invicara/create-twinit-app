@@ -1,0 +1,84 @@
+.weather-icon{
+    width: 100%;
+    height: 100%;
+}
+
+.dashboard-container {
+    height: calc(100vh - 62px);
+    padding: 0; 
+    display: grid;
+    grid-template-columns: 1% 20% 1% 20% 1% 10% 1% 22% 1% 22% 1%;
+    grid-template-rows: 2% 30.67% 2% 30.67% 2% 30.67% 2%; 
+    background-color: whitesmoke;
+
+    #small,
+    #medium,
+    #large{
+        display: none;
+    }
+
+    .common-card{
+        padding: 2.1vh; 
+        background-color: 'white'
+    }
+
+    .card-title {
+        font-size: 2.1vh; 
+        font-weight: 700; 
+        margin-bottom: 2.5vh
+    }
+
+    .card-sub-header {
+        font-weight: 700; 
+        margin-bottom: 1.4vh; 
+        font-size: 1.4vh
+    }
+
+    .card-text-content{
+        font-size: 1.36vh; 
+        color: #555;
+    }
+
+    .iterative-points{ 
+        width: 0.8vh; 
+        height: 0.8vh; 
+        margin-left: 7px;
+        border-radius: 50px; 
+        background-color: #C71784,
+    }
+}
+
+.big-card{
+    #navbar, .context-menu{
+        display: none;
+    }
+
+    #webviewer-container {
+        display: block;
+        position: relative !important;
+        // width: auto !important;
+        height: 100% !important;
+        padding: 0px !important;
+        box-shadow: none;
+
+        #mainViewer{
+            height: calc(51vh - 62px) !important;
+        }
+        
+        #mainViewer-canvas-container {
+            display: block;
+            position: relative !important;
+            width: 100% !important;
+
+        }
+
+        * {
+            top: 0
+        }
+
+        // #mainViewer{
+        //     position: relative !important;
+        //     height: 100%;            
+        // }
+    }
+}

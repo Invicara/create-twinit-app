@@ -11,7 +11,7 @@ $white: white;
 $black: black;
 $add-element-button-bar-height: 20px;
 $asset-title-margin: 15px;
-$bottom-panel-right-width: 290px;
+$bottom-panel-right-width: 250px;
 
 .navigator-modless {
   position: absolute;
@@ -113,10 +113,6 @@ $bottom-panel-right-width: 290px;
 }
 
 @mixin left-panel-border {
-  border-left: 1px solid #b2b2b2;
-}
-
-@mixin right-panel-border {
   border-right: 1px solid #b2b2b2;
 }
 
@@ -155,7 +151,7 @@ $bottom-panel-right-width: 290px;
       flex-direction: row;
       flex: 1;/*stretch to keep bottom panel at the bottom*/
 
-      overflow-y: auto;
+      overflow-y: scroll;
 
 
       .navigator-drawer-container {
@@ -164,8 +160,6 @@ $bottom-panel-right-width: 290px;
         overflow-y: hidden;
         overflow-x: auto;
         box-shadow: 5px 0 8px 0px lightgrey inset;
-        position: relative;
-
         &:last-of-type {
           box-shadow: 5px 0 8px 0px lightgrey inset, 5px 0 8px 0px rgba(0, 0, 0, 0.2),;
 
@@ -188,33 +182,9 @@ $bottom-panel-right-width: 290px;
           background: #B8B8B8;
         }
       }
-
-      .navigator-drawer-title-bar {
-        position: absolute;
-        padding: 0.5em 0px;
-        left: 0px;
-        width: 100%;
-        height: 30px;
-        background: #6c757d14;
-        text-align: center;
-        color: #b2b2b2;
-      }
       
       .navigator-drawer-content {
         padding: 30px;
-      }
-    }
-
-    .navigator-view__system-drawers {
-      background-color: transparent;
-      position: unset !important;
-      display: flex;
-      flex-direction: row;
-      flex: 1;
-      overflow-y: auto;
-
-      .drawer {
-        background-color: white;
       }
     }
 
@@ -226,29 +196,11 @@ $bottom-panel-right-width: 290px;
       color: #666666;
     }
 
-    .navigator-bottom-first-col-wrap {
-      min-width: $bottom-panel-right-width;
-      &.right-bar {
-        @include right-panel-border;
-      }
-    }
-
     .navigator-bottom-icons {
       display: flex;
-
+      width: $bottom-panel-right-width;
       justify-content: space-between;
-
-      &.left-bar {
-        @include left-panel-border;
-      }
-
-      &.right-bar {
-        @include right-panel-border;
-      }
-
-      &.under-toolbar{
-        width: 100px;
-      }
+      @include left-panel-border;
 
       .navigator-bottom-left-icons {
         display: flex;
@@ -266,9 +218,8 @@ $bottom-panel-right-width: 290px;
     .bottom-panel {
       z-index: 1;
       background: white;
-      &.closed {
-        height: auto !important;
-      }
+      display: flex;
+      flex-direction: column;
     }
 
     .bottom-panel__icons {
@@ -283,40 +234,10 @@ $bottom-panel-right-width: 290px;
       }
     }
 
-    .bottom-panel__text {
-      font-size: 10px;
-    }
-
-    .GenericMatGroupButton {
-
-      i {
-        font-size: smaller;
-        line-height: 1.5em;
-        padding: 3px;
-      }
-
-      &.active:not([disabled]) {
-        background-color: var(--app-accent-color);
-        color: white;
-      }
-
-      &.active-secondary:not([disabled]) {
-        color: var(--app-accent-color);
-      }
-
-    }
-
     .bottom-panel-content {
       background-color: $white;
       display: flex;
-      height: 0;
       transition: height 1s;
-      &.open {
-        min-height: 250px;
-      }
-      &.closed {
-        max-height: 0;
-      }
     }
 
 
@@ -324,13 +245,12 @@ $bottom-panel-right-width: 290px;
     .bottom-panel-content-left {
       min-width: $bottom-panel-right-width;
       height: 100%;
-      @include right-panel-border;
+      overflow-y: auto;
 
       .bottom-panel__data-group-tab {
         display: flex;
         padding-left: 40px;
         align-items: center;
-        justify-content: space-between;
         height: 40px;
         color: $base-text-color;
         cursor: pointer;
@@ -344,33 +264,16 @@ $bottom-panel-right-width: 290px;
     .bottom-panel-content-right { 
       padding-left: $asset-title-margin;
       overflow: auto;
-      scrollbar-gutter: stable;
-      flex-grow: 1;
-
-
-      .bottom-panel-content-right__wrapper {
-
-      }
-
-      .scripted-chart {
-        height: 200px;
-      }
+      border-left: 1px solid #b2b2b2;
     }
-
-    @include ipa_padding_util;
 
     .bottom-panel-title-bar {
       background-color: $light-grey;
       border-top: 1px solid $medium-grey;
       border-bottom: 1px solid $medium-grey;
-      height: 40px;
+      height: 35px;
       display: flex;
       align-items: center;
-
-      .f-s-smaller {
-        font-size: smaller;
-      }
-
     }
 
     .bottom-panel-title {
@@ -380,9 +283,7 @@ $bottom-panel-right-width: 290px;
       font-size: 1.2em;
       margin: 0 $asset-title-margin;
       align-items: CENTER;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      overflow-x: auto;
       flex: 1;
 
       .bottom-panel__entity-controls {
@@ -408,6 +309,10 @@ $bottom-panel-right-width: 290px;
 
         .arrow-right {
           padding-left: 16px;
+          width: auto;
+          height: auto;
+          bottom: initial;
+          left: initial;
         }
         
         .arrow-disabled {
@@ -424,21 +329,20 @@ $bottom-panel-right-width: 290px;
 
       > * {
         background-color: transparent;
-        color: var(--app-accent-color);
+        color: #666666;
         margin: 0 5px;
         font-size: 0.8em;
         cursor: pointer;
-        width: auto;
-        height: auto;
-        padding: 8px;
       }
 
       .inv-icon-svg {
-        filter: brightness(0.4);
-        width: 29px;
-        height: 20px;
+        mask-size: cover;
+        mask-position: 0px -3px;
+        width: 23px;
+        height: 17px;
         background-size: 20px;
         background-position: 0;
+        background-color: var(--app-accent-color);
       }
     }
 

@@ -1,6 +1,5 @@
 const version = {
-  package: "0.0.0",
+  version: "0.0.0",
   branch: "master",
   git: "aaaaaaa"
 };
-
