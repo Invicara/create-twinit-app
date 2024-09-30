@@ -3,10 +3,11 @@
   "version": "0.0.0",
   "description": "default-description",
   "homepage": ".",
+  "type": "module",
   "scripts": {
     "build-dev": "NODE_OPTIONS=--max-old-space-size=2048 webpack",
     "build": "NODE_OPTIONS=--max-old-space-size=2048 webpack --config webpack.prod.js",
-    "watch": "webpack serve --open / --port 8083 --config webpack.config.js",
+    "watch": "webpack serve --open / --port 8084 --config webpack.config.js",
     "start": "NODE_OPTIONS=--max-old-space-size=2048 webpack serve --progress",
     "test-prod": "NODE_OPTIONS=--max-old-space-size=2048 webpack serve --config webpack.prod.js --port 8083"
   },
