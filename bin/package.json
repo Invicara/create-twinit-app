@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "description": "default-description",
   "homepage": ".",
-  "type": "module",
   "scripts": {
     "build-dev": "NODE_OPTIONS=--max-old-space-size=2048 webpack",
     "build": "NODE_OPTIONS=--max-old-space-size=2048 webpack --config webpack.prod.js",
