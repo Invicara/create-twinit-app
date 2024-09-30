@@ -5,7 +5,7 @@ const path = require('path')
 const fs = require('fs')
 const { read } = require('read')
 
-const package = require('./package.json')
+const packageTemplate = require('./package.json')
 
 let nameOptions = {prompt: "Twinit app name:", default: "my-twinit-react-client"}
 read(nameOptions).then((appName) => {
@@ -30,12 +30,12 @@ read(nameOptions).then((appName) => {
 
                      decompress(path.join(__dirname, 'starter-app-source.zip'), './', {strip: 1}).then(() => {
          
-                        package.name = appName.replaceAll(' ', '-').toLowerCase()
-                        package.description = desc
-                        package.version = version
-                        package.author = author
+                        packageTemplate.name = appName.replaceAll(' ', '-').toLowerCase()
+                        packageTemplate.description = desc
+                        packageTemplate.version = version
+                        packageTemplate.author = author
          
-                        fs.writeFileSync('./package.json', JSON.stringify(package, null, 3))
+                        fs.writeFileSync('./package.json', JSON.stringify(packageTemplate, null, 3))
 
                         fs.writeFileSync('./app/public/config.js', `const endPointConfig = {
                            itemServiceOrigin: '${url}',
