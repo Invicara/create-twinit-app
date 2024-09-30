@@ -34,6 +34,7 @@ read(nameOptions).then((appName) => {
                         packageTemplate.description = desc
                         packageTemplate.version = version
                         packageTemplate.author = author
+                        packageTemplate.type = "module"
          
                         fs.writeFileSync('./package.json', JSON.stringify(packageTemplate, null, 3))
 
