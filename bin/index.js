@@ -51,6 +51,7 @@ read(nameOptions).then((appName) => {
                         fs.writeFileSync('./app/ipaCore/ipaConfig.js', `const ipaConfig = {
                            appName: "${appName}",
                            configUserType: "${cfgtype}",
+                           applicationId: '${appId}',
                            scriptPlugins: [],
                            css: [],
                            redux: {
