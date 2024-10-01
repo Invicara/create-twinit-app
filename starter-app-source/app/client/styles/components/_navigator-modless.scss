@@ -79,6 +79,8 @@ $bottom-panel-right-width: 250px;
   opacity: 1;
   transition: opacity 1s;
   overflow-y: scroll;
+  max-height: 100%;
+  height: 100%;
 
   &::-webkit-scrollbar {
     width: 7px;
@@ -96,9 +98,6 @@ $bottom-panel-right-width: 250px;
   &::-webkit-scrollbar-thumb:hover {
       background: #B8B8B8;
   }
-
-  max-height: 100%;
-  height: 100%;
 }
 .navigator-modless-content-closed {
   opacity: 0;
