@@ -5,6 +5,7 @@ const path = require('path')
 const fs = require('fs')
 const { read } = require('read')
 
+const appPackage = require('../package.json')
 const packageTemplate = require('./package.json')
 
 let nameOptions = {prompt: "Twinit app name:", default: "my-twinit-react-client"}
@@ -35,6 +36,9 @@ read(nameOptions).then((appName) => {
                         packageTemplate.version = version
                         packageTemplate.author = author
                         packageTemplate.type = "module"
+                        packageTemplate.dev_twinit = {
+                           createdBy: `create-twinit-app@${appPackage.version}`
+                        }
          
                         fs.writeFileSync('./package.json', JSON.stringify(packageTemplate, null, 3))
 
