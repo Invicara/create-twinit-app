@@ -55,7 +55,7 @@ const CONFIG = {
         {from: 'app/public/helpers.js', to: 'helpers.js'},
         {from: 'app/public/fontawesome.css', to: 'fontawesome.css'},
         {from: 'app/public/webfonts', to: 'webfonts/', toType: 'dir'},
-        {from: 'node_modules/@dtplatform/iaf-viewer/dist/lib/', to: 'lib/', toType: 'dir'},
+        // {from: 'node_modules/@dtplatform/iaf-viewer/dist/lib/', to: 'lib/', toType: 'dir'},
         {from: 'IpaFonts', to: 'fonts/', context: 'node_modules/@invicara/ipa-core/modules/'},
         {from: 'IpaIcons', to: 'fonts/', context: 'node_modules/@invicara/ipa-core/modules/'},
       ]
