@@ -14,7 +14,7 @@
     "build": "echo \"Build not needed\" && exit 0"
   },
   "author": "Invicara Developer Support <developer.support@invicara.com>",
-  "license": "APACHE 2.0 January 2004",
+  "license": "Apache-2.0",
   "dependencies": {
     "decompress": "4.2.1",
     "read": "3.0.1"
