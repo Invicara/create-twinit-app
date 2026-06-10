@@ -119,9 +119,6 @@
     "@dtplatform/iaf-viewer": "^5.1.0",
     "@dtplatform/platform-api": "^5.1.0",
     "@dtplatform/ui-utils": "^5.1.0"
-  },
-  "dev_twinit": {
-     "createdBy": "create-twinit-app@3.1.7"
-  }       
+  }      
 }
   
