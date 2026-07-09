@@ -58,20 +58,7 @@ const CONFIG = {
         {from: 'app/public/webfonts', to: 'webfonts/', toType: 'dir'},
         {from: 'IpaFonts', to: 'fonts/', context: 'node_modules/@invicara/ipa-core/modules/'},
         {from: 'IpaIcons', to: 'fonts/', context: 'node_modules/@invicara/ipa-core/modules/'},
-        {from: 'app/public/icons/logo_32px.png', to: 'logo_32px.png'},
-        {from: 'app/public/icons/logo.png', to: 'logo.png'},
-        {from: 'app/public/icons/assets.png', to: 'assets.png'},
-        {from: 'app/public/icons/navigator.png', to: 'navigator.png'},
-        {from: 'app/public/icons/spaces.png', to: 'spaces.png'},
-        {from: 'app/public/icons/docs.png', to: 'docs.png'},
-        {from: 'app/public/icons', to: 'icons'},
-        {from: 'app/public/icons/simple_navigator.png', to: 'simple_navigator.png'},
-        {from: 'app/public/icons/simple_buildingPerformance.png', to: 'simple_buildingPerformance.png'},
-        {from: 'app/public/icons/simple_comfortWellness.png', to: 'simple_comfortWellness.png'},
-        {from: 'app/public/icons/simple_files.png', to: 'simple_files.png'},
-        {from: 'app/public/icons/simple_smartBuilding.png', to: 'simple_smartBuilding.png'},
-        {from: 'app/public/icons/simple_spaces.png', to: 'simple_spaces.png'},
-        {from: 'app/public/icons/simple_assets.png', to: 'simple_assets.png'},
+        {from: 'app/public/icons', to: 'icons/', toType: 'dir'},
       ]
     }),
     new webpack.ProvidePlugin({
@@ -159,7 +146,8 @@ const CONFIG = {
       "url": resolve("url/"),
       "https": resolve("https-browserify"),
       "http": resolve("stream-http"),
-      "vm": require.resolve("vm-browserify")
+      "vm": require.resolve("vm-browserify"),
+      "zlib": require.resolve("browserify-zlib")
     }
   },
   node: {
