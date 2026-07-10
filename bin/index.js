@@ -2,14 +2,12 @@
 
 const path = require('path')
 const fs = require('fs')
-const { createRequire } = require('module')
 const { parseCliArgs } = require('./parse-cli-args')
 
-const cliRoot = path.join(__dirname, '..')
-const cliRequire = createRequire(path.join(cliRoot, 'package.json'))
-
-const appPackage = cliRequire('./package.json')
-const packageTemplate = cliRequire('./bin/package.json')
+const appPackage = require('../package.json')
+const packageTemplate = require('./package.json')
+const { read } = require('read')
+const decompress = require('decompress')
 
 const PROMPTS = [
   { key: 'name', prompt: 'Twinit app name:', default: 'my-twinit-react-client' },
@@ -89,14 +87,36 @@ function logCliUsage(cli) {
   }
 }
 
-function ensureCliDependencies() {
-  try {
-    cliRequire.resolve('decompress')
-    cliRequire.resolve('read')
-  } catch (error) {
-    console.error('Error: create-twinit-app CLI dependencies are not installed.')
-    console.error(`Run: cd "${cliRoot}" && npm install`)
-    process.exit(1)
+function isSpuriousDirectoryFile(file) {
+  if (file.type !== 'file' || file.data.length > 0) {
+    return false
+  }
+
+  const normalizedPath = file.path.replace(/\\/g, '/')
+  if (normalizedPath.endsWith('/')) {
+    return true
+  }
+
+  const baseName = path.basename(normalizedPath)
+  return baseName !== '' && !baseName.includes('.')
+}
+
+async function extractStarterApp(outputDir) {
+  const files = await decompress(path.join(__dirname, 'starter-app-source.zip'), {
+    strip: 1,
+    filter: (file) => !isSpuriousDirectoryFile(file),
+  })
+
+  for (const file of files) {
+    const dest = path.join(outputDir, file.path)
+
+    if (file.type === 'directory') {
+      fs.mkdirSync(dest, { recursive: true })
+      continue
+    }
+
+    fs.mkdirSync(path.dirname(dest), { recursive: true })
+    fs.writeFileSync(dest, file.data)
   }
 }
 
@@ -108,16 +128,8 @@ async function main() {
     return
   }
 
-  if (path.resolve(process.cwd()) === path.resolve(cliRoot)) {
-    console.error('Error: Run this command from an empty project folder, not inside the create-twinit-app repository.')
-    process.exit(1)
-  }
-
-  ensureCliDependencies()
-
   logCliUsage(cli)
 
-  const { read } = cliRequire('read')
   const options = {}
 
   for (const field of PROMPTS) {
@@ -130,8 +142,7 @@ async function main() {
 
   const { name: appName, description: desc, version, author, applicationId: appId, configUserType: cfgtype, apiUrl: url } = options
 
-  const decompress = cliRequire('decompress')
-  await decompress(path.join(__dirname, 'starter-app-source.zip'), './', { strip: 1 })
+  await extractStarterApp('.')
 
   packageTemplate.name = appName.replaceAll(' ', '-').toLowerCase()
   packageTemplate.description = desc

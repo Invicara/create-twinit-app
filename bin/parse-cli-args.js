@@ -104,9 +104,6 @@ function parseCliArgs(argv) {
     }
 
     if (!isFlagToken(arg)) {
-      if (!args.name) {
-        args.name = stripQuotes(arg)
-      }
       continue
     }
 
