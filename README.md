@@ -1,43 +1,31 @@
-![digitaltwin-factory logo](./img/dtfactoryv3.png)
+# create-twinit-app react application scaffold
 
-# digitaltwin-factory
+create-twinit-app scaffolds a basic React application that uses ipa-core and the Twinit platform api node modules.
+It is intended to be a starting point and as such will likely not meet your needs 100% out of the box, may include
+more libraries than you require, or use tools that you don't use. It is expected that you will make the
+changes you need to this scaffolded client.
 
-create-twinit-app is made available as a part of the digitaltwin-factory open source community. Join the digitaltwin-factory community to gain access to a wealth of information and training material on how to use Twinit to accomplish your digital twin goals. Membership in digitaltwin-factory open-source community includes access to self-led development courses for building applications using Twinit, access to the developer documentation for Twinit concepts, services, and APIs, access to open-source code modules and UI libraries to help accelerate and kick-start your projects, as well as access to a community of developers who develop using Twinit. For more information visit [https://invicara.com/](https://invicara.com/) and [https://twinit.com/](https://twinit.com/.)
+There are three files you will most likely to adjust further:
 
-# CREATE-TWINIT-APP
+- package.json: edit as you would for any react client application
+- app/public/config.js: edit if you need to point your client to another Twinit instance or change your applciation id
+- app/ipaCore/ipaConfig.js: edit as outlined in the ipa-core documentation to configure your client application
 
-create-twinit-app scaffolds a new Twinit React client application much in the same way the create-react-app initializes a new react application.
+## Run Local Development
 
-## Required Private Libraries
+Before you can run the client you first need to be able to install dependecies from the @invicara and @dtplatform private npm repos.
+TO help wiht this, an .npmrc file was created by create-twinit-app that will allow you to connect to these private repositories.
+In order for the .npmrc file to work, you must set three environments on your system with your credentials.
+Instruction on how to do this are available on [twnit.dev](https://twinit.dev/docs/apis/javascript/npm-install).
+Be sure to follow those steps before going any further.
 
-In order for the client to run, you will need to install private Twinit node modules. You can get access to these private code modules by joining the digitaltwin-factory open-source community. You will also need to configure the .npmrc file installed by create-twinit-app into your application folder. Instructions on how to do so are available [here](https://twinit.dev/docs/apis/javascript/npm-install).
+If you have created your environment variables and provided correct information when running create-twinit-app then to run the client all you need to do is:
 
-## Running create-twinit-app
+1. npm install
+2. npm run watch
 
-Before running create-twinit-app you may want to gather the follow information, as create-twinit-app will prompt you for it.
-You may instead accept the defaults all the way through, and update the information later as well.
+## Build Deployable Client
 
-* Your application name (default: 'my-twinit-react-client')
-* Your application description (default: 'My Twinit React Client Description')
-* Your application version (default: '1.0.0')
-* Your application author (default: 'None')
-* Your Twinit Application ID (default: 'The Twinit Academy Training Application ID')
-* Your Twinit application's user config _userType (default: 'dev-train')
-* The Twinit API instance your client will connect to (default: 'https://sandbox-api.invicara.com')
+The following command will build the client and write it to the build folder.
 
-When ready run:
-
-```
-npx create-twinit-app@latest
-```
-
-After create-twinit-app has finished you can run the empty client by*:
-* Be sure you have read the note above about accessing private Twinit node modules.
-
-```
-npm install
-npm run watch
-```
-
-The client will be served at http://localhost:8084. You can change this by adjusting the webpack config and the baseRoot in ./app/public/config.js.
-If you do not have access to the private Twinit node modules, or have not set up your .npmrc file (provided by create-twinit-app) correctly, then you will authentication and access errors durin gthe npm install.
+1. npm run build

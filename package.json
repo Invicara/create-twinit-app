@@ -1,22 +1,22 @@
 {
-  "name": "create-twinit-app",
-  "version": "3.1.9",
-  "description": "npx cmd to create a scaffloded Twinit React client app",
-  "bin": {
-    "create-twinit-app": "bin/index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Invicara/create-twinit-app.git"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "echo \"Build not needed\" && exit 0"
-  },
-  "author": "Invicara Developer Support <developer.support@invicara.com>",
-  "license": "Apache-2.0",
-  "dependencies": {
-    "decompress": "4.2.1",
-    "read": "3.0.1"
-  }
-}
+   "name": "create-twinit-app",
+   "version": "3.1.10",
+   "description": "npx cmd to create a scaffloded Twinit React client app",
+   "bin": {
+     "create-twinit-app": "bin/index.js"
+   },
+   "repository": {
+     "type": "git",
+     "url": "git+https://github.com/Invicara/create-twinit-app.git"
+   },
+   "scripts": {
+     "test": "echo \"Error: no test specified\" && exit 1",
+     "build": "echo \"Build not needed\" && exit 0"
+   },
+   "author": "Invicara Developer Support <developer.support@invicara.com>",
+   "license": "Apache-2.0",
+   "dependencies": {
+     "decompress": "4.2.1",
+     "read": "3.0.1"
+   }
+ }
