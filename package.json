@@ -16,7 +16,7 @@
    "author": "Invicara Developer Support <developer.support@invicara.com>",
    "license": "Apache-2.0",
    "dependencies": {
-     "decompress": "4.2.1",
+     "adm-zip": "0.6.1",
      "read": "3.0.1"
    }
  }

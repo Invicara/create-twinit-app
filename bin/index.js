@@ -7,7 +7,7 @@ const { parseCliArgs } = require('./parse-cli-args')
 const appPackage = require('../package.json')
 const packageTemplate = require('./package.json')
 const { read } = require('read')
-const decompress = require('decompress')
+const AdmZip = require('adm-zip')
 
 const PROMPTS = [
   { key: 'name', prompt: 'Twinit app name:', default: 'my-twinit-react-client' },
@@ -87,36 +87,48 @@ function logCliUsage(cli) {
   }
 }
 
-function isSpuriousDirectoryFile(file) {
-  if (file.type !== 'file' || file.data.length > 0) {
+// Zero-length entries with no extension are directories stored as files by
+// some zip tools; skip them so they don't block the real directory.
+function isSpuriousDirectoryFile(entryPath, data) {
+  if (data.length > 0) {
     return false
   }
 
-  const normalizedPath = file.path.replace(/\\/g, '/')
-  if (normalizedPath.endsWith('/')) {
-    return true
-  }
-
-  const baseName = path.basename(normalizedPath)
+  const baseName = path.posix.basename(entryPath)
   return baseName !== '' && !baseName.includes('.')
 }
 
 async function extractStarterApp(outputDir) {
-  const files = await decompress(path.join(__dirname, 'starter-app-source.zip'), {
-    strip: 1,
-    filter: (file) => !isSpuriousDirectoryFile(file),
-  })
+  const root = path.resolve(outputDir)
+  const zip = new AdmZip(path.join(__dirname, 'starter-app-source.zip'))
 
-  for (const file of files) {
-    const dest = path.join(outputDir, file.path)
+  for (const entry of zip.getEntries()) {
+    // Normalize Windows separators and strip the top-level folder
+    const normalizedPath = entry.entryName.replace(/\\/g, '/')
+    const isDirectory = normalizedPath.endsWith('/')
+    const relativePath = normalizedPath.split('/').filter(Boolean).slice(1).join('/')
 
-    if (file.type === 'directory') {
+    if (!relativePath) {
+      continue
+    }
+
+    const dest = path.resolve(root, relativePath)
+    if (!dest.startsWith(root + path.sep)) {
+      throw new Error(`Refusing to extract ${entry.entryName}: path escapes ${root}`)
+    }
+
+    if (isDirectory) {
       fs.mkdirSync(dest, { recursive: true })
       continue
     }
 
+    const data = entry.getData()
+    if (isSpuriousDirectoryFile(relativePath, data)) {
+      continue
+    }
+
     fs.mkdirSync(path.dirname(dest), { recursive: true })
-    fs.writeFileSync(dest, file.data)
+    fs.writeFileSync(dest, data)
   }
 }
 
